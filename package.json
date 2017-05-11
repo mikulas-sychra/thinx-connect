@@ -1,5 +1,5 @@
 {
-  "name": "thinx-connect",
+  "name": "THiNX-Connect",
   "version": "1.0.0",
   "description": "http-to-https proxy for thinx.cloud",
   "main": "app.js",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/suculent/thinx-connect/issues"
   },
-  "homepage": "https://github.com/suculent/thinx-connect#readme"
+  "homepage": "https://github.com/suculent/thinx-connect#readme",
+  "dependencies": {
+    "http-proxy": "^1.16.2",
+    "sync-exec": "^0.6.2"
+  }
 }
