@@ -6,14 +6,15 @@ var https = require('https'),
   colors = require('colors'),
   httpProxy = require('http-proxy');
 
-var serverPort = 7442; // same as thinx.cloud API
+var serverPort = null; // same as thinx.cloud API
 
-var use_https = false;
+var use_https = true; // disable for testing
 
-if (use_https) {
+if (use_https) {  
   /* production */
+  serverPort = 7443;
   httpProxy.createProxyServer({
-    target: 'https://thinx.cloud:7442',
+    target: 'https://thinx.cloud:7443',
     agent: https.globalAgent,
     headers: {
       host: 'thinx.cloud'
@@ -21,6 +22,7 @@ if (use_https) {
   }).listen(7442);
 } else {
   /* testing */
+  serverPort = 7442;
   httpProxy.createProxyServer({
     target: 'http://thinx.cloud:7442',
     agent: http.globalAgent,
@@ -43,7 +45,11 @@ console.log("-=[".red + " ☢ " + name.white + " v".red.bold + version.red.bold 
   " rev. ".red + version.red +
   " ☢ " + " ]=-".red);
 console.log("");
-console.log("» Started on port " + serverPort);
+if (use_https) {
+  console.log("» HTTPS Proxy from port 7442 to port " + serverPort);
+} else {
+  console.log("» HTTP Proxy from port 7442 to port " + serverPort);
+}
 
 // Prevent crashes on uncaught exceptions
 

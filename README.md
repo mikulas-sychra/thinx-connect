@@ -19,6 +19,5 @@ You can run the proxy-server simply with `node app.js`, but it's recommended to 
 
 ## Roadmap
 
-* Currently the version is in HTTP-only test mode, will change to HTTPS
 * Should provide MDNS responder
 * Should route MQTT as well
