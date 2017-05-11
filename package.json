@@ -1,0 +1,19 @@
+{
+  "name": "thinx-connect",
+  "version": "1.0.0",
+  "description": "http-to-https proxy for thinx.cloud",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/suculent/thinx-connect.git"
+  },
+  "author": "Matej Sychra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/suculent/thinx-connect/issues"
+  },
+  "homepage": "https://github.com/suculent/thinx-connect#readme"
+}
