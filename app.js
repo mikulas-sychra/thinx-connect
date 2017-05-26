@@ -6,13 +6,29 @@ var fs = require('fs');
 var colors = require('colors');
 var httpProxy = require('http-proxy');
 
-var serverPort = null; // same as thinx.cloud API
+/* MQTT HTTPS <*/
+httpProxy.createProxyServer({
+  target: 'https://thinx.cloud:1883',
+  agent: http.globalAgent,
+  headers: {
+    host: 'thinx.cloud'
+  }
+}).listen(1883);
+
+/* MQTTHTTP */
+httpProxy.createProxyServer({
+  target: 'http://thinx.cloud:8883',
+  agent: https.globalAgent,
+  headers: {
+    host: 'thinx.cloud'
+  }
+}).listen(8883);
 
 var use_https = true; // disable for testing
 
-if (use_https) {  
-  /* production */
-  serverPort = 7443;
+if (use_https) {
+
+  /* HTTP to HTTPS proxy */
   httpProxy.createProxyServer({
     target: 'https://thinx.cloud:7443',
     agent: https.globalAgent,
@@ -20,9 +36,10 @@ if (use_https) {
       host: 'thinx.cloud'
     }
   }).listen(7442);
+
 } else {
-  /* testing */
-  serverPort = 7442;
+
+  /* HTTP to HTTP for testing */
   httpProxy.createProxyServer({
     target: 'http://thinx.cloud:7442',
     agent: http.globalAgent,
@@ -31,6 +48,15 @@ if (use_https) {
     }
   }).listen(7442);
 }
+
+/* HTTPS to HTTPS fall-trough */
+httpProxy.createProxyServer({
+  target: 'https://thinx.cloud:7443',
+  agent: https.globalAgent,
+  headers: {
+    host: 'thinx.cloud'
+  }
+}).listen(7443);
 
 var package_info = require("./package.json");
 var name = package_info.name;
@@ -45,11 +71,6 @@ console.log("-=[".red + " ☢ " + name.white + " v".red.bold + version.red.bold 
   " rev. ".red + version.red +
   " ☢ " + " ]=-".red);
 console.log("");
-if (use_https) {
-  console.log("» HTTPS Proxy from port 7442 to port " + serverPort);
-} else {
-  console.log("» HTTP Proxy from port 7442 to port " + serverPort);
-}
 
 // Prevent crashes on uncaught exceptions
 

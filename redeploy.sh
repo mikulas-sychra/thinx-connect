@@ -23,6 +23,11 @@ fi
 
 # log to file and do not exit with this terminal session
 echo "Finally running the thinx-https-proxy until end of the days..."
+
+killall tail
+
+forever stop app.js
+
 nohup forever -o out.log -e err.log app.js &
 
 echo "Check out the log (you can log out / Ctrl-C anytime while keeping the proxy up)"
