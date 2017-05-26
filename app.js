@@ -1,10 +1,10 @@
-var https = require('https'),
-  http = require('http'),
-  util = require('util'),
-  path = require('path'),
-  fs = require('fs'),
-  colors = require('colors'),
-  httpProxy = require('http-proxy');
+var https = require('https');
+var http = require('http');
+var util = require('util');
+var path = require('path');
+var fs = require('fs');
+var colors = require('colors');
+var httpProxy = require('http-proxy');
 
 var serverPort = null; // same as thinx.cloud API
 
