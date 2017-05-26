@@ -15,11 +15,15 @@
 git pull origin master # you may delete `origin master` to track own branch
 
 # install forever globally if not found on path
-if [[ ! -f $(which forever) ]]; then
+HAS_FOREVER=$(which forever)
+if [[ ! -f ${HAS_FOREVER} ]]; then
+	echo "Installing 'forever' node.js process manager, this could take a while on Raspberry Pi (tested on v3) and therefore we expect you'll have a plenty of time to read this until the end."
 	npm install forever -g
 fi
 
 # log to file and do not exit with this terminal session
+echo "Finally running the thinx-https-proxy until end of the days..."
 nohup forever -o out.log -e err.log app.js &
 
+echo "Check out the log (you can log out / Ctrl-C anytime while keeping the proxy up)"
 tail -f *.log
