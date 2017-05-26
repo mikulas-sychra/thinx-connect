@@ -4,7 +4,7 @@
   "description": "http-to-https proxy for thinx.cloud",
   "main": "app.js",
   "scripts": {
-    "test": "npm test"
+    "test": "snyk test && npm test"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/suculent/thinx-connect#readme",
   "dependencies": {
+    "colors": "^1.1.2",
     "http-proxy": "^1.16.2",
     "sync-exec": "^0.6.2"
+  },
+  "devDependencies": {
+    "snyk": "^1.30.1"
   }
 }
