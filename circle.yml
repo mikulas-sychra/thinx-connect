@@ -1,17 +1,14 @@
 machine:
   node:
     version:
-      5.9.0
+      7.10.0
 
 dependencies:
   pre:
     - npm install .
-    
+
 ## Customize test commands
-test:
-  pre:
-    - bash ./03-test.sh
-        background: true
+test:  
   post:
     - curl -sSL https://download.sourceclear.com/ci.sh | bash
 
