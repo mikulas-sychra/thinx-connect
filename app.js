@@ -41,34 +41,16 @@ var ThinxProxy = function() {
     }
   }).listen(8883);
 
-  var use_https = false; // disable for testing
+  console.log("Starting HTTP->HTTPS listener on port 7442->7443...");
 
-  if (use_https === true) {
-
-    console.log("Starting HTTP->HTTPS listener on port 7442->7443...");
-
-    /* HTTP to HTTPS proxy */
-    httpProxy.createProxyServer({
-      target: 'https://thinx.cloud:7443',
-      agent: https.globalAgent,
-      headers: {
-        host: 'thinx.cloud'
-      }
-    }).listen(7442);
-
-  } else {
-
-    console.log("Starting HTTP listener on port 7442...");
-
-    /* HTTP to HTTP for testing */
-    httpProxy.createProxyServer({
-      target: 'http://thinx.cloud:7442',
-      agent: http.globalAgent,
-      headers: {
-        host: 'thinx.cloud'
-      }
-    }).listen(7442);
-  }
+  /* HTTP to HTTPS proxy */
+  httpProxy.createProxyServer({
+    target: 'https://thinx.cloud:7443',
+    agent: https.globalAgent,
+    headers: {
+      host: 'thinx.cloud'
+    }
+  }).listen(7442);
 
   console.log("Starting HTTPS listener o port 7443...");
 
