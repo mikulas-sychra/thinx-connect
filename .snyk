@@ -4,6 +4,10 @@ version: v1.7.1
 ignore:
   'npm:sync-exec:20160124':
     - sync-exec:
-        reason: indirect vulnerability
-        expires: '2017-06-25T22:20:59.742Z'
-patch: {}
+        reason: not an issue
+        expires: '2017-06-28T12:28:44.437Z'
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:ms:20170412':
+    - rollbar > debug > ms:
+        patched: '2017-05-29T12:27:59.259Z'

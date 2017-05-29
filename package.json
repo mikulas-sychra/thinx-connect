@@ -4,8 +4,10 @@
   "description": "http-to-https proxy for thinx.cloud",
   "main": "app.js",
   "scripts": {
-    "test": "nyc jasmine && nyc report --reporter=text-lcov | coveralls",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "test": "snyk test && nyc jasmine && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,8 @@
     "http-proxy": "^1.16.2",
     "rollbar": "^2.0.2",
     "ssl-root-cas": "^1.2.3",
-    "sync-exec": "^0.6.2"
+    "sync-exec": "^0.6.2",
+    "snyk": "^1.31.1"
   },
   "devDependencies": {
     "codecov": "^2.2.0",
@@ -34,7 +37,7 @@
     "karma": "^1.7.0",
     "mocha": "^3.4.2",
     "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^10.3.2",
-    "snyk": "^1.30.1"
-  }
+    "nyc": "^10.3.2"
+  },
+  "snyk": true
 }
