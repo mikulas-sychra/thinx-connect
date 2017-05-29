@@ -12,9 +12,6 @@ var ThinxProxy = function() {
 
   var https = require('https');
   var http = require('http');
-  var util = require('util');
-  var path = require('path');
-  var fs = require('fs');
   var colors = require('colors');
   var httpProxy = require('http-proxy');
 
@@ -46,7 +43,7 @@ var ThinxProxy = function() {
 
   var use_https = false; // disable for testing
 
-  if (use_https) {
+  if (use_https === true) {
 
     console.log("Starting HTTP->HTTPS listener on port 7442->7443...");
 
@@ -88,7 +85,7 @@ var ThinxProxy = function() {
   var name = package_info.name;
 
   var exec = require("sync-exec");
-  CMD = "git rev-list HEAD --count";
+  var CMD = "git rev-list HEAD --count";
   var temp = exec(CMD).stdout.replace("\n", "");
   var version = "" + parseInt(temp);
 
@@ -97,14 +94,6 @@ var ThinxProxy = function() {
     " rev. ".red + version.red +
     " ☢ " + " ]=-".red);
   console.log("");
-
-  // Prevent crashes on uncaught exceptions
-
-  process.on("uncaughtException", function(err) {
-    console.log("Caught exception: " + err);
-  });
-
-
 };
 
 var proxy = new ThinxProxy();
