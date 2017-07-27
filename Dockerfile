@@ -5,7 +5,7 @@ MAINTAINER suculent
 #ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-  && apt-get install -y git bash nano wget nodejs npm \
+  && apt-get install -y git bash nano wget nodejs npm libavahi-compat-libdnssd-dev \
   && ln -s /usr/bin/nodejs /usr/local/bin/node
 
 RUN apt-get clean \
