@@ -6,6 +6,7 @@ var ThinxProxy = function() {
   var http = require('http');
   var colors = require('colors');
   var httpProxy = require('http-proxy');
+  var mdns = require('mdns');
 
   var rootCas = require('ssl-root-cas').create();
   require('https').globalAgent.options.ca = rootCas;
@@ -67,6 +68,10 @@ var ThinxProxy = function() {
   console.log("-=[".red + " ☢ " + name.white + " v".red.bold + version.red.bold +
     " rev. ".red + version.red +
     " ☢ " + " ]=-".red);
+
+  var http_to_https_service = new mdns.ServiceType('thinx', 'proxy');
+  var ad = mdns.createAdvertisement(http_to_https_service, 7442);
+  ad.start();
 };
 
 var proxy = new ThinxProxy();

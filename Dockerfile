@@ -12,6 +12,9 @@ RUN apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && useradd --no-create-home thinx
 
+RUN echo "127.0.0.1 thinx" >> /etc/hosts \
+    && echo "thinx" >> /etc/hosts \
+
 RUN su thinx \
   && git clone https://github.com/suculent/thinx-connect.git \
   && chown -R thinx:thinx /thinx-connect \

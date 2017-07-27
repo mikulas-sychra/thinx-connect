@@ -6,13 +6,19 @@ Simple thinx.cloud HTTP to HTTPS proxy server for your Raspberry Pi or another n
 
 ## Installation
 
-  Requires having `node.js` installed as a prerequisite.
+### Standalone node.js app
+
+Requires having `node.js` installed as a prerequisite.
 
 ```
 git clone https://github.com/suculent/thinx-connect.git
 cd ./thinx-connect/
 npm install .
 ```
+
+### Docker image
+
+There is also Docker image available [here](https://hub.docker.com/r/suculent/thinx-connect/) for installation via `docker pull suculent/thinx-connect`
 
 ## Running
 
@@ -23,7 +29,7 @@ You can run the proxy-server simply with `node app.js`, but it's recommended to 
       [sudo] npm install forever -g
       forever -o out.log -e err.log app.js
 
-## Runnings with Docker
+## Running with Docker
 
 THiNX-Connect is also available as a Docker image. The repository provides a `Dockerfile` to build the [THiNX-Connect](https://hub.docker.com/r/suculent/thinx-connect/) HTTP/HTTPS proxy.
 
@@ -50,16 +56,9 @@ Start the container and keep it running (in background)
 Start the container and keep it running (in foreground while inspecting the log)
 
 ```bash
-  docker run -itd suculent/thinx-connect node /thinx-connect/app.js > nohup.out & tail -f nohup.out
+  docker run -p 127.0.0.1:7442:7442 -p 127.0.0.1:7443:7443 -p 127.0.0.1:1883:1883 -p 127.0.0.1:8883:8883 -itd suculent/thinx-connect node /thinx-connect/app.js > nohup.out & tail -f nohup.out
 ```
 
 ```bash
-  docker run -itd suculent/thinx-connect nohup forever /thinx-connect/app.js && tail -f nohup.out
+  docker run -p7442:7442 -p7443:7443 -p1883:1883 -p8883:8883 -itd suculent/thinx-connect nohup forever /thinx-connect/app.js && tail -f nohup.out
 ```
-
-
-## Roadmap
-
-* Should appear as thinx.cloud.local on local network so the devices looking for thinx.cloud will find proxy first
-* Should provide optional MDNS responder
-* Should route MQTT as well
