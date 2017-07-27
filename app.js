@@ -1,13 +1,5 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-var Rollbar = require('rollbar');
-
-var rollbar = new Rollbar({
-  accessToken: 'e9375504ce274dce84bfc905ce6e6893',
-  handleUncaughtExceptions: true,
-  handleUnhandledRejections: true
-});
-
 var ThinxProxy = function() {
 
   var https = require('https');
@@ -15,7 +7,7 @@ var ThinxProxy = function() {
   var colors = require('colors');
   var httpProxy = require('http-proxy');
 
-  var rootCas = require('ssl-root-cas/latest').create();
+  var rootCas = require('ssl-root-cas').create();
   require('https').globalAgent.options.ca = rootCas;
   require('ssl-root-cas').inject();
 
@@ -75,7 +67,6 @@ var ThinxProxy = function() {
   console.log("-=[".red + " ☢ " + name.white + " v".red.bold + version.red.bold +
     " rev. ".red + version.red +
     " ☢ " + " ]=-".red);
-  console.log("");
 };
 
 var proxy = new ThinxProxy();
