@@ -3,6 +3,7 @@
   "version": "1.0.10",
   "description": "http-to-https proxy for thinx.cloud",
   "main": "app.js",
+  "start": "nohup forever --minUptime 1000 --spinSleepTime 5000 /thinx-connect/app.js"
   "scripts": {
     "test": "snyk test && nyc jasmine && nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",

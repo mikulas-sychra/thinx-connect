@@ -2,7 +2,7 @@ FROM ubuntu:trusty
 ARG VERSION=master
 MAINTAINER suculent
 
-ARG DEBIAN_FRONTEND=noninteractive
+#ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
   && apt-get install -y git bash nano wget nodejs npm \
@@ -14,8 +14,8 @@ RUN apt-get clean \
 
 RUN su thinx \
   && git clone https://github.com/suculent/thinx-connect.git \
-  && chown -R thinx:thinx ./thinx-connect \
-  && cd ./thinx-connect \
+  && chown -R thinx:thinx /thinx-connect \
+  && cd /thinx-connect \
   && npm install . \
   && npm install forever -g
 
@@ -23,4 +23,4 @@ USER thinx
 
 CMD which node \
 && cd ./thinx-connect \
-&& forever app.js
+&& nohup forever --minUptime 1000 --spinSleepTime 5000 ./app.js & tail -f nohup.out

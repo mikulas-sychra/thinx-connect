@@ -44,13 +44,17 @@ Once the container is built successfuly create a container from the image
 Start the container and keep it running (in background)
 
 ```bash
-   docker run -itd suculent/thinx-connect node ./thinx-connect/app.js
+   docker run -itd suculent/thinx-connect node /thinx-connect/app.js && bash
 ```
 
 Start the container and keep it running (in foreground while inspecting the log)
 
 ```bash
-  docker run -itd suculent/thinx-connect nohup forever --minUptime=1000 --spinSleepTime=5000 ./thinx-connect/app.js & tail -f nohup.out
+  docker run -itd suculent/thinx-connect node /thinx-connect/app.js > nohup.out & tail -f nohup.out
+```
+
+```bash
+  docker run -itd suculent/thinx-connect nohup forever /thinx-connect/app.js && tail -f nohup.out
 ```
 
 
