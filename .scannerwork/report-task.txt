@@ -1,5 +1,0 @@
-projectKey=thinx-connect:thinx
-serverUrl=http://192.168.166.234:9000
-dashboardUrl=http://192.168.166.234:9000/dashboard/index/thinx-connect:thinx
-ceTaskId=AVxUFXvk19D9pPbmWne2
-ceTaskUrl=http://192.168.166.234:9000/api/ce/task?id=AVxUFXvk19D9pPbmWne2
