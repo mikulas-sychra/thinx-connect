@@ -1,6 +1,6 @@
 {
   "name" : "THiNX-Connect",
-  "version" : "1.0.22",
+  "version" : "1.0.24",
   "description" : "http-to-https proxy for thinx.cloud",
   "main" : "app.js",
   "start" : "nohup forever --minUptime 1000 --spinSleepTime 5000 /thinx-connect/app.js",
@@ -27,8 +27,7 @@
     "mdns" : "^2.3.3",
     "rollbar" : "^2.0.2",
     "snyk" : "^1.31.1",
-    "ssl-root-cas" : "^1.2.3",
-    "sync-exec" : "^0.6.2"
+    "ssl-root-cas" : "^1.2.3"
   },
   "devDependencies" : {
     "codecov" : "^2.2.0",

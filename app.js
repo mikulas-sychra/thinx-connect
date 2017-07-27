@@ -59,9 +59,10 @@ var ThinxProxy = function() {
   var package_info = require("./package.json");
   var name = package_info.name;
 
-  var exec = require("sync-exec");
+  var exec = require("child_process");
   var CMD = "git rev-list HEAD --count";
-  var temp = exec(CMD).stdout.replace("\n", "");
+  var temp = execSync(CMD).replace("\n", "");
+  console.log("CMD result: " + temp);
   var version = "" + parseInt(temp);
 
   console.log("");
