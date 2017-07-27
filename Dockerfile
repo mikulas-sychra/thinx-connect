@@ -23,4 +23,4 @@ USER thinx
 
 CMD which node \
 && cd ./thinx-connect \
-&& forever app.js &
+&& forever app.js
