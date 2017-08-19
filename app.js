@@ -1,13 +1,16 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-
 var ThinxProxy = function() {
 
   var https = require('https');
   var http = require('http');
+  var util = require('util');
+  var path = require('path');
+  var fs = require('fs');
   var colors = require('colors');
   var httpProxy = require('http-proxy');
-  var mdns = require('mdns');
+  
 
+  var wsPort = 7444;
+  
   var rootCas = require('ssl-root-cas').create();
   require('https').globalAgent.options.ca = rootCas;
   require('ssl-root-cas').inject();
@@ -40,6 +43,7 @@ var ThinxProxy = function() {
   httpProxy.createProxyServer({
     target: 'https://thinx.cloud:7443',
     agent: https.globalAgent,
+    secure: false,
     headers: {
       host: 'thinx.cloud'
     }
@@ -55,6 +59,15 @@ var ThinxProxy = function() {
       host: 'thinx.cloud'
     }
   }).listen(7443);
+  
+  console.log("Starting WSS Proxy on port " + wsPort);
+  
+  /* proxy websockets */
+  httpProxy.createProxyServer({
+      target: 'wss://thinx.cloud:' + wsPort,
+      secure: false,
+      ws: true
+  }).listen(wsPort);
 
   var package_info = require("./package.json");
   var name = package_info.name;
@@ -76,3 +89,8 @@ var ThinxProxy = function() {
 };
 
 var proxy = new ThinxProxy();
+
+// Prevent crashes on uncaught exceptions
+process.on("uncaughtException", function(err) {
+  console.log("Caught exception: " + err);
+});
