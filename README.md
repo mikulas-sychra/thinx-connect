@@ -4,6 +4,8 @@
 
 Simple thinx.cloud HTTP to HTTPS proxy server for your Raspberry Pi or another node.js capable machine.
 
+Based on [THiNX OpenSource IoT management platform](https://thinx.cloud).
+
 ## Installation
 
 ### Standalone node.js app
